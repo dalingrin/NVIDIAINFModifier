@@ -1,0 +1,37 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFApp"
+        xmlns:ViewModel="clr-namespace:WPFApp.ViewModel" xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml" x:Class="WPFApp.MainWindow"
+        mc:Ignorable="d"
+        Title="NVIDIA INF Modifier" Height="284.157" Width="483.885" Loaded="Window_Loaded">
+    <Grid>
+        <StackPanel>
+            <GroupBox Header="Highlight the NVIDIA GPU" Margin="10,0">
+                <StackPanel Margin="10,10,10,10" HorizontalAlignment="Stretch">
+                    <DataGrid x:Name="devicesDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedDevice}" HorizontalAlignment="Stretch" EnableRowVirtualization="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="keyColumn" Width="*"  IsReadOnly="True" Header="Device Description" Binding="{Binding Key}"/>
+                            <!--DataGridTextColumn x:Name="valueColumn" Width="Auto" IsReadOnly="True" Header="Device Id" Binding="{Binding Value}"/-->
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="Select the folder where the NVIDIA driver has been extracted" Margin="10,10">
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="85"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" HorizontalAlignment="Stretch" Text="{Binding FolderPath}"/>
+                    <Button x:Name="BrowseButton" Grid.Column="1" Content="Browse" HorizontalAlignment="Right" Width="80" Height="21" VerticalAlignment="Top" Click="BrowseButton_Click"/>
+                </Grid>
+            </GroupBox>
+            
+        </StackPanel>
+        <Button x:Name="ModifyButton" Content="Modify INF Files" Click="ModifyButton_Click" VerticalAlignment="Bottom" IsEnabled="{Binding CanModify}" HorizontalAlignment="Right" Margin="0,0,10,10"/>
+    </Grid>
+</Window>
